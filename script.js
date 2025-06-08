@@ -7,6 +7,7 @@ let categories = [
     { id: 5, name: "Personal Care", slug: "personal-care", icon: "💄", description: "Beauty and personal care products", productCount: 600, discountText: "Up to 50% off" }
 ];
 
+
 let retailers = [
     { id: 1, name: "amazon", displayName: "Amazon India", color: "text-blue-600", website: "amazon.in" },
     { id: 2, name: "flipkart", displayName: "Flipkart", color: "text-blue-600", website: "flipkart.com" },
