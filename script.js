@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function () {
 let categories = [
     { id: 1, name: "Electronics", slug: "electronics", icon: "📱", description: "Smartphones, laptops, tablets and more", productCount: 1000, discountText: "Up to 60% off" },
     { id: 2, name: "Kitchen", slug: "kitchen", icon: "🍳", description: "Kitchen appliances and cookware", productCount: 500, discountText: "Up to 45% off" },
@@ -711,8 +712,6 @@ function renderPopularSearches() {
         </button>
     `).join('');
 }
-
-document.addEventListener('DOMContentLoaded', function() {
 
     renderCategories();
     renderProducts();
