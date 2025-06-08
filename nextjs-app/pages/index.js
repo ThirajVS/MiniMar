@@ -71,9 +71,9 @@ export default function Home() {
             </header>
             <nav className="main-nav">
               
-              <a href="#">Home</Link>
-              <a href="/about">About</Link>
-              <a href="/contact">Contact</Link>
+              <a href="#">Home</a>
+              <a href="/about">About</a>
+              <a href="/contact">Contact</a>
             </nav>
                 <nav class="category-nav">
         <div class="container">
