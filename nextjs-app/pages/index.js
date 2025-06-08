@@ -251,7 +251,7 @@ export default function Home() {
                         </div>
                         <div class="logo-text">
                             <h3>MiniMar</h3>
-                            <p>Smart Shopping Made Easy</p>
+                            <p></p>
                         </div>
                     </div>
                     <p class="brand-description">
