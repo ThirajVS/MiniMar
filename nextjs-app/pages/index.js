@@ -259,10 +259,10 @@ export default function Home() {
                         Your smart shopping companion.
                     </p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <Link href="#"><i class="fab fa-facebook"></i></Link>
+                        <Link href="#"><i class="fab fa-twitter"></i></Link>
+                        <Link href="#"><i class="fab fa-instagram"></i></Link>
+                        <Link href="#"><i class="fab fa-linkedin"></i></Link>
                     </div>
                 </div>
                 <div class="footer-links">
