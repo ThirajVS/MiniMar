@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Script from 'next/script';
+import Link from 'next/link';
 
 export default function Home() {
 
@@ -68,7 +69,12 @@ export default function Home() {
                 </div>
               </div>
             </header>
-
+            <nav className="main-nav">
+              
+              <a href="#">Home</Link>
+              <a href="/about">About</Link>
+              <a href="/contact">Contact</Link>
+            </nav>
                 <nav class="category-nav">
         <div class="container">
             <div class="nav-content">
