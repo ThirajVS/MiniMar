@@ -190,13 +190,6 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-          integrity="sha512-yfOBFvrcbb9vCIbB1F88vZu+8UdVpJ9CUhqyp88UVnyUIEVqVdO5G4CUAxNMbPSsCkZnSK1Cl+VuOZeZ4SxiEA=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
       </Head>
 
       {/* Top Navigation */}
