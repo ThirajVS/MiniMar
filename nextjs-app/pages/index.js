@@ -184,9 +184,9 @@ export default function Home() {
     <>
       <Head>
         <title>MiniMar - Smart Shopping List & Deal Finder</title>
-        <meta name="description" content="Compare prices across India's top retailers and save money on every purchase." />
+        <meta name="description" content="Compare prices across India&apos;s top retailers and save money on every purchase." />
         <meta property="og:title" content="MiniMar - Smart Shopping List & Deal Finder" />
-        <meta property="og:description" content="Compare prices across India's top retailers and save money on every purchase." />
+        <meta property="og:description" content="Compare prices across India&apos;s top retailers and save money on every purchase." />
         <meta property="og:type" content="website" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
@@ -332,7 +332,7 @@ export default function Home() {
               <div className="deals-card">
                 <div className="deals-header">
                   <div className="deals-icon">🏷️</div>
-                  <h3>Today's Best Deals</h3>
+                  <h3>Today&apos;s Best Deals</h3>
                 </div>
                 <div className="deals-list">
                   <div className="deal-item">
@@ -496,7 +496,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="brand-description">
-                Compare prices across India's top retailers and save money on every purchase.
+                Compare prices across India&apos;s top retailers and save money on every purchase.
                 Your smart shopping companion.
               </p>
               <div className="social-links">
