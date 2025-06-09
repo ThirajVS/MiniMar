@@ -105,14 +105,17 @@ products.forEach(product => {
   const productCard = document.createElement("div");
   productCard.className = "product-card";
   productCard.innerHTML = `
+  <div style="flex: 1;">
     <img src="${product.imageUrl}" alt="${product.name}" class="product-image" style="width:100%; border-radius:12px;" />
     <h3 style="margin-top: 10px;">${product.name}</h3>
     <p>${product.description}</p>
     <p class="price" style="font-weight:bold;color:#222;">₹${product.currentPrice.toLocaleString("en-IN")}</p>
-    <button class="add-to-cart btn btn-primary" data-name="${product.name}" data-price="${product.currentPrice}">
-      <i class="fas fa-cart-plus"></i> Add to Cart
-    </button>
-  `;
+  </div>
+  <button class="add-to-cart btn btn-primary" data-name="${product.name}" data-price="${product.currentPrice}">
+    <i class="fas fa-cart-plus"></i> Add to Cart
+  </button>
+`;
+
   productsGrid.appendChild(productCard);
 });
 
@@ -125,7 +128,7 @@ document.addEventListener("click", function (e) {
     const name = button.getAttribute("data-name");
     const price = parseInt(button.getAttribute("data-price"));
 
-    cartItems.push({ name, price });
+    cartItems.push({ name, price, quantity: 1 });
     cartCount++;
     updateCartUI();
 
@@ -139,24 +142,29 @@ function updateCartUI() {
   const cartItemsElem = document.getElementById("cartItems");
   const cartFooter = document.getElementById("cartFooter");
 
-  // Update counters
-  if (cartCountElem) cartCountElem.textContent = cartCount;
-  if (floatingCartCount) floatingCartCount.textContent = cartCount;
+  // Update counter
+  if (cartCountElem) cartCountElem.textContent = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  if (floatingCartCount) floatingCartCount.textContent = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  // Clear current items
+  // Clear list
   if (cartItemsElem) cartItemsElem.innerHTML = "";
 
   let totalPrice = 0;
 
   cartItems.forEach((item, index) => {
-    totalPrice += item.price;
+    totalPrice += item.price * item.quantity;
 
     const itemElem = document.createElement("div");
     itemElem.className = "cart-item";
     itemElem.innerHTML = `
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-price">₹${item.price.toLocaleString("en-IN")}</div>
+        <div class="cart-item-price">₹${(item.price * item.quantity).toLocaleString("en-IN")}</div>
+        <div class="quantity-controls">
+          <button class="qty-btn minus" data-index="${index}">−</button>
+          <span class="quantity">${item.quantity}</span>
+          <button class="qty-btn plus" data-index="${index}">+</button>
+        </div>
       </div>
       <button class="remove-item" data-index="${index}" style="background: #ef4444; color: white; border: none; padding: 4px 10px; border-radius: 6px; cursor: pointer;">
         Remove
@@ -165,6 +173,7 @@ function updateCartUI() {
     cartItemsElem.appendChild(itemElem);
   });
 
+  // Footer total + clear cart + checkout
   if (cartFooter) {
     cartFooter.innerHTML = `
       <div class="cart-total">
@@ -172,18 +181,41 @@ function updateCartUI() {
         <span class="total-amount">₹${totalPrice.toLocaleString("en-IN")}</span>
       </div>
       <button class="checkout-btn"><i class="fas fa-credit-card"></i> Checkout</button>
+      <button class="clear-cart-btn" style="margin-left: 1rem; background:#9ca3af; color:white; padding:0.5rem 1rem; border-radius:8px; border:none; cursor:pointer;">
+        Clear Cart
+      </button>
     `;
   }
 
-  // Bind remove buttons
+  // Remove item
   document.querySelectorAll(".remove-item").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const index = parseInt(e.target.getAttribute("data-index"));
-      cartItems.splice(index, 1); // remove item
-      cartCount--;
-      updateCartUI(); // refresh UI
+      cartItems.splice(index, 1);
+      updateCartUI();
     });
   });
-}
 
-}); 
+  // Quantity + / -
+  document.querySelectorAll(".qty-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const index = parseInt(btn.getAttribute("data-index"));
+      if (btn.classList.contains("plus")) {
+        cartItems[index].quantity += 1;
+      } else if (btn.classList.contains("minus") && cartItems[index].quantity > 1) {
+        cartItems[index].quantity -= 1;
+      }
+      updateCartUI();
+    });
+  });
+
+  // Clear cart
+  const clearCartBtn = document.querySelector(".clear-cart-btn");
+  if (clearCartBtn) {
+    clearCartBtn.addEventListener("click", () => {
+      cartItems = [];
+      updateCartUI();
+    });
+  }
+}
+});

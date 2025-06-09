@@ -1537,7 +1537,12 @@ body {
   border-radius: 12px;
   padding: 16px;
   max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Ensure full height */
 }
+
 .top-pages-nav {
   background-color: #ffffff;
   border-bottom: 1px solid #e5e7eb;
