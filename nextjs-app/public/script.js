@@ -83,7 +83,7 @@ window.addEventListener("load", () => {
     {
       name: "Lakme Radiance Foundation",
       description: "SPF 20, radiant coverage",
-      imageUrl: "https://images.unsplash.com/photo-1631214540242-9c9bb16bb3e1?auto=format&fit=crop&w=400&h=300",
+      imageUrl: "https://m.media-amazon.com/images/I/51PeHvfAUUL._SX522_.jpg?auto=format&fit=crop&w=400&h=300",
       currentPrice: 629
     },
     {
