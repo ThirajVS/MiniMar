@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
     {
       name: "Samsung Galaxy S24 Ultra",
       description: "200MP camera, S Pen, AI features",
-      imageUrl: "https://www.myg.in/images/thumbnails/300/300/detailed/74/1_koh3-3z-removebg-preview.png.png?auto=format&fit=crop&w=400&h=300",
+      imageUrl: "https://img-prd-pim.poorvika.com/prodvarval/Samsung-galaxy-s24-ultra-5g-titanium-Violet-256gb-12gb-ram-Front-Back-View-Thumbnail.png?auto=format&fit=crop&w=400&h=300",
       currentPrice: 109999
     },
     {
