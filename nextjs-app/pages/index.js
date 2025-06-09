@@ -14,7 +14,13 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        
+          <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-yfOBFvrcbb9vCIbB1F88vZu+8UdVpJ9CUhqyp88UVnyUIEVqVdO5G4CUAxNMbPSsCkZnSK1Cl+VuOZeZ4SxiEA=="
+    crossOrigin="anonymous"
+    referrerPolicy="no-referrer"
+  />
       </Head>
 
       <Script
@@ -22,6 +28,27 @@ export default function Home() {
         strategy="afterInteractive"
         onLoad={() => console.log('✅ script.js loaded (afterInteractive)')}
       />
+        <nav className="top-pages-nav">
+            <div className="container">
+            <ul className="page-links">
+                <li>
+                    <Link href="/" className="page-link">
+                    <i className="fas fa-home"></i> Home
+                </Link>
+                </li>
+                <li>
+                    <Link href="/about" className="page-link">
+                    <i className="fas fa-info-circle"></i> About
+                </Link>
+                </li>
+                <li>
+                    <Link href="/contact" className="page-link">
+                    <i className="fas fa-phone"></i> Contact
+                </Link>
+                </li>
+            </ul>
+  </div>
+</nav>
 
       <div
         dangerouslySetInnerHTML={{
@@ -69,12 +96,7 @@ export default function Home() {
                 </div>
               </div>
             </header>
-            <nav className="main-nav">
-              
-              <a href="#">Home</a>
-              <a href="/about">About</a>
-              <a href="/contact">Contact</a>
-            </nav>
+
                 <nav class="category-nav">
         <div class="container">
             <div class="nav-content">
@@ -251,7 +273,7 @@ export default function Home() {
                         </div>
                         <div class="logo-text">
                             <h3>MiniMar</h3>
-                            <p></p>
+                            <p>Smart Shopping Made Easy</p>
                         </div>
                     </div>
                     <p class="brand-description">
