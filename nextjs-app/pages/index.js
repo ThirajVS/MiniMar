@@ -324,7 +324,7 @@ export default function Home() {
               <h2 className="hero-title">Find the Best Deals Across India</h2>
               <p className="hero-description">
                 Compare prices from Amazon, Flipkart, Myntra & more in one place.
-                Save time and money with MiniMar's smart shopping assistant.
+                Save time and money with MiniMar&apos;s smart shopping assistant.
               </p>
               <div className="hero-buttons">
                 <button className="btn btn-primary">
