@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
     {
       name: "Samsung Galaxy S24 Ultra",
       description: "200MP camera, S Pen, AI features",
-      imageUrl: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=400&h=300",
+      imageUrl: "https://www.myg.in/images/thumbnails/300/300/detailed/74/1_koh3-3z-removebg-preview.png.png?auto=format&fit=crop&w=400&h=300",
       currentPrice: 109999
     },
     {
@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
     {
       name: "Tata Salt (1kg)",
       description: "India’s trusted salt brand",
-      imageUrl: "https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=400&h=300",
+      imageUrl: "https://m.media-amazon.com/images/I/614mm2hYHyL.jpg?auto=format&fit=crop&w=400&h=300",
       currentPrice: 22
     },
     {
@@ -47,7 +47,7 @@ window.addEventListener("load", () => {
     {
       name: "Philips Air Fryer 4.1L",
       description: "Fat removal tech, digital presets",
-      imageUrl: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=400&h=300",
+      imageUrl: "https://alghandielectronics.com/images/productimages/16042209195f9e77f71ce62.jpg?auto=format&fit=crop&w=400&h=300",
       currentPrice: 12995
     },
     {
@@ -71,7 +71,7 @@ window.addEventListener("load", () => {
     {
       name: "Hawkins Pressure Cooker",
       description: "Premium safety valve cooker",
-      imageUrl: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=400&h=300",
+      imageUrl: "https://m.media-amazon.com/images/I/51z8bjUc4kL.jpg?auto=format&fit=crop&w=400&h=300",
       currentPrice: 2299
     },
     {
