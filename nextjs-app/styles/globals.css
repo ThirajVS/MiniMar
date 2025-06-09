@@ -329,18 +329,22 @@ body {
 }
 
 .hero {
-    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
-    color: white;
-    padding: 4rem 0;
-    overflow: hidden;
+  background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
+  color: white;
+  padding: 4rem 0;
+  z-index: 1;
+  position: relative;
 }
 
 .hero-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  z-index: 2;
+  position: relative;
 }
+
 
 .hero-title {
     font-size: 3rem;
@@ -609,6 +613,9 @@ body {
     align-items: center;
 }
 
+.product-card button {
+  margin-top: auto; /* pushes it to the bottom in column layout */
+}
 .product-image {
     width: 100%;
     height: 12rem;
@@ -1525,16 +1532,14 @@ body {
 }
 
 .product-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 16px;
-  max-width: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  min-height: 420px; 
+  justify-content: space-between; /* crucial */
+  height: 100%; /* ensure all cards get full height */
+  padding: 1.5rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .top-pages-nav {
