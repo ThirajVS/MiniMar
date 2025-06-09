@@ -166,11 +166,15 @@ export default function Home() {
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   // Search functionality
-  const filteredProducts = products
-    .filter((p) => filter === 'all' || p.category === filter)
-    .filter((p) =>
-      p.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+const filteredProducts = products.filter((p) => {
+  const matchesCategory = filter === 'all' || p.category === filter;
+  const matchesSearch =
+    searchQuery.trim() === '' ||
+    p.name.toLowerCase().includes(searchQuery.toLowerCase());
+
+  return matchesCategory && matchesSearch;
+});
+
 
   // Search suggestions
   const suggestions = searchQuery
@@ -190,6 +194,16 @@ useEffect(() => {
   return () => document.removeEventListener('click', handleClickOutside);
 }, []);
 
+const handleCategoryClick = (category) => {
+  setSearchQuery('');          // 💥 clear search text
+  setShowSuggestions(false);   // optional: hide suggestions
+  setFilter(category);         // set the clicked category
+
+  const target = document.getElementById('personal-care-deals');
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
+};
   return (
     <>
       <Head>
@@ -328,13 +342,7 @@ useEffect(() => {
                 <button
                   key={category}
                   className={`category-btn ${filter === category ? 'active' : ''}`}
-                  onClick={() => {
-                    setFilter(category);
-                    const target = document.getElementById('personal-care-deals');
-                    if (target) {
-                      target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
+                  onClick={() => handleCategoryClick(category)}
                 >
                   <i className={`category-icon fas fa-${category === 'all' ? 'th' : category === 'electronics' ? 'laptop' : category === 'kitchen' ? 'utensils' : category === 'groceries' ? 'carrot' : category === 'clothing' ? 'tshirt' : 'hand-holding-medical'}`}></i>
                   {category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' ')}
@@ -412,15 +420,8 @@ useEffect(() => {
               <div
                 key={category}
                 className="category-card"
-                onClick={() => {
-                setFilter(category);
-                const target = document.getElementById('personal-care-deals');
-                if (target) {
-                  target.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
+                onClick={() => handleCategoryClick(category)}
 >
-
                 <div className="category-card-icon">
                   <i className={`fas fa-${category === 'electronics' ? 'laptop' : category === 'kitchen' ? 'utensils' : category === 'groceries' ? 'carrot' : category === 'clothing' ? 'tshirt' : 'hand-holding-medical'}`}></i>
                 </div>
@@ -503,23 +504,26 @@ useEffect(() => {
           </div>
           <div className="search-tags">
             {['iPhone 15', 'Samsung Galaxy', 'MacBook Air', 'Air Fryer', 'Nike Shoes', 'Face Wash'].map((tag) => (
-              <button
-              key={tag}
-              className="search-tag"
-              onClick={() => {
-              setSearchQuery(tag);               
-              setShowSuggestions(false);         
-              setTimeout(() => {
-                const target = document.getElementById('personal-care-deals');
-              if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });  
-              }
-            }, 50);
-          }}
+  <button
+    key={tag}
+    className="search-tag"
+    onClick={() => {
+      setFilter('all'); // ✅ Reset category
+      setSearchQuery(''); // Force update
+      setShowSuggestions(false);
+      setTimeout(() => {
+        setSearchQuery(tag);
+        const target = document.getElementById('personal-care-deals');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 10);
+    }}
   >
     {tag}
   </button>
 ))}
+
 
           </div>
           <div className="stats-grid">
