@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import CategoryFilter from '@/components/CategoryFilter';
 
 export default function Home() {
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [filter, setFilter] = useState('all');
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
@@ -179,6 +180,15 @@ export default function Home() {
         )
         .slice(0, 5)
     : [];
+useEffect(() => {
+  const handleClickOutside = (e) => {
+    if (!e.target.closest('.search-container')) {
+      setShowSuggestions(false);
+    }
+  };
+  document.addEventListener('click', handleClickOutside);
+  return () => document.removeEventListener('click', handleClickOutside);
+}, []);
 
   return (
     <>
@@ -229,7 +239,19 @@ export default function Home() {
               </div>
             </div>
             <div className="search-container">
-              <form className="search-form" onSubmit={(e) => e.preventDefault()}>
+              <form
+                className="search-form"
+                onSubmit={(e) => {
+                e.preventDefault();
+                setShowSuggestions(false); // hide suggestion box
+                const target = document.getElementById('personal-care-deals');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+>
+
+
                 <div className="search-input-wrapper">
                   <input
                     type="text"
@@ -237,7 +259,10 @@ export default function Home() {
                     placeholder="Search for products, brands and more..."
                     className="search-input"
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setShowSuggestions(true); // show suggestions when typing
+                    }}
                   />
                   <i className="fas fa-search search-icon"></i>
                   <button type="submit" className="search-btn">
@@ -245,14 +270,25 @@ export default function Home() {
                   </button>
                 </div>
               </form>
-              {suggestions.length > 0 && (
+              {suggestions.length > 0 && showSuggestions && (
                 <div className="search-suggestions show">
                   {suggestions.map((product, index) => (
                     <div
                       key={index}
                       className="suggestion-item"
-                      onClick={() => setSearchQuery(product.name)}
-                    >
+                      onClick={() => {
+                        setSearchQuery(product.name);
+                        setShowSuggestions(false); // hide suggestion box
+                        setTimeout(() => {
+                      const target = document.getElementById('personal-care-deals');
+                      if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                      }
+                  }, 50);
+                }}
+>
+
+
                       <i className="fas fa-search"></i>
                       {product.name}
                     </div>
@@ -292,10 +328,17 @@ export default function Home() {
                 <button
                   key={category}
                   className={`category-btn ${filter === category ? 'active' : ''}`}
-                  onClick={() => setFilter(category)}
+                  onClick={() => {
+                    setFilter(category);
+                    const target = document.getElementById('personal-care-deals');
+                    if (target) {
+                      target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
                   <i className={`category-icon fas fa-${category === 'all' ? 'th' : category === 'electronics' ? 'laptop' : category === 'kitchen' ? 'utensils' : category === 'groceries' ? 'carrot' : category === 'clothing' ? 'tshirt' : 'hand-holding-medical'}`}></i>
                   {category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' ')}
+                  
                 </button>
               ))}
             </div>
@@ -369,8 +412,15 @@ export default function Home() {
               <div
                 key={category}
                 className="category-card"
-                onClick={() => setFilter(category)}
-              >
+                onClick={() => {
+                setFilter(category);
+                const target = document.getElementById('personal-care-deals');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+>
+
                 <div className="category-card-icon">
                   <i className={`fas fa-${category === 'electronics' ? 'laptop' : category === 'kitchen' ? 'utensils' : category === 'groceries' ? 'carrot' : category === 'clothing' ? 'tshirt' : 'hand-holding-medical'}`}></i>
                 </div>
@@ -388,8 +438,10 @@ export default function Home() {
         <div className="container">
           <div className="products-header">
             <div className="products-title">
+              <section id="personal-care-deals">
               <h2>Best Deals Today</h2>
               <p>Handpicked deals with the biggest savings</p>
+              </section>
             </div>
             <div className="products-controls">
               <select className="sort-select">
