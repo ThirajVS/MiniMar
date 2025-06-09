@@ -259,12 +259,6 @@ function updateCartUI() {
     referrerPolicy="no-referrer"
   />
       </Head>
-
-      <Script
-        src="/script.js"
-        strategy="afterInteractive"
-        onLoad={() => console.log('✅ script.js loaded (afterInteractive)')}
-      />
         <nav className="top-pages-nav">
             <div className="container">
             <ul className="page-links">
