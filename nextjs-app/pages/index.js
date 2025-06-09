@@ -334,30 +334,26 @@ export default function Home() {
         </div>
     </footer>
 
-    <div class="floating-cart" id="floatingCart">
-        <button class="floating-cart-btn">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-badge" id="floatingCartCount">0</span>
-        </button>
+<!-- Floating Cart -->
+<div class="floating-cart" id="floatingCart">
+  <button class="floating-cart-btn">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-badge" id="floatingCartCount">0</span>
+  </button>
+</div>
+
+<!-- Cart Modal -->
+<div class="cart-modal" id="cartModal">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Shopping Cart</h3>
+      <button class="close-btn" id="closeCart"><i class="fas fa-times"></i></button>
     </div>
-
-    <div class="cart-modal" id="cartModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Shopping Cart</h3>
-                <button class="close-btn" id="closeCart">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body" id="cartItems">
-
-            </div>
-            <div class="modal-footer" id="cartFooter">
-
-            </div>
-        </div>
-    </div>
+    <div class="modal-body" id="cartItems"></div>
+    <div class="modal-footer" id="cartFooter"></div>
+  </div>
+</div>
 
           `
         }}

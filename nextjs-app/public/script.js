@@ -119,6 +119,19 @@ products.forEach(product => {
   productsGrid.appendChild(productCard);
 });
 
+document.getElementById("cartToggle")?.addEventListener("click", () => {
+  document.getElementById("cartModal")?.classList.add("show");
+});
+
+document.getElementById("floatingCart")?.addEventListener("click", () => {
+  document.getElementById("cartModal")?.classList.add("show");
+});
+
+document.getElementById("closeCart")?.addEventListener("click", () => {
+  document.getElementById("cartModal")?.classList.remove("show");
+});
+
+
 let cartItems = [];
 let cartCount = 0;
 
