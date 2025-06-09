@@ -58,7 +58,7 @@ export default function Home() {
         category: 'groceries'
       },
       {
-        name: "Nike Air Max 270",
+        name: "Nike Shoes – Air Max 270",
         description: "Air heel, mesh upper, ultra comfort",
         imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&h=300",
         currentPrice: 5999,
@@ -504,13 +504,23 @@ useEffect(() => {
           <div className="search-tags">
             {['iPhone 15', 'Samsung Galaxy', 'MacBook Air', 'Air Fryer', 'Nike Shoes', 'Face Wash'].map((tag) => (
               <button
-                key={tag}
-                className="search-tag"
-                onClick={() => setSearchQuery(tag)}
-              >
-                {tag}
-              </button>
-            ))}
+              key={tag}
+              className="search-tag"
+              onClick={() => {
+              setSearchQuery(tag);               
+              setShowSuggestions(false);         
+              setTimeout(() => {
+                const target = document.getElementById('personal-care-deals');
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });  
+              }
+            }, 50);
+          }}
+  >
+    {tag}
+  </button>
+))}
+
           </div>
           <div className="stats-grid">
             <div className="stat-card red">
