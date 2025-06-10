@@ -10,6 +10,7 @@ export default function Contact() {
       maxWidth: '800px',
       margin: '0 auto'
     }}>
+      
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <FaHeadset size={48} style={{ color: '#FF6B35' }} />
         <h1 style={{ fontSize: '2.5rem', marginTop: '0.5rem' }}>Contact Us</h1>
