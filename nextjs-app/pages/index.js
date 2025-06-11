@@ -738,7 +738,7 @@ const handleCategoryClick = (category) => {
     onClick={() => setIsChatOpen(true)}
     style={{
       position: 'fixed',
-      bottom: '100px',
+      bottom: '20px',
       left: '20px',
       backgroundColor: '#2563EB',
       color: 'white',
@@ -760,7 +760,7 @@ const handleCategoryClick = (category) => {
   <div
     style={{
       position: 'fixed',
-      bottom: '170px',
+      bottom: '90px',
       left: '20px',
       width: '320px',
       maxHeight: '420px',
