@@ -10,7 +10,37 @@ export default function Home() {
   const [cartItems, setCartItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState('');
+  const [aiMessages, setAiMessages] = useState([
+    { role: 'assistant', content: "Hello! How can I assist you today?" }
+  ]);
+  const [isTyping, setIsTyping] = useState(false);
+
   const categories = ['all', 'electronics', 'kitchen', 'groceries', 'clothing', 'personal_care'];
+  const sendAiMessage = async () => {
+  if (!chatInput.trim()) return;
+
+  setAiMessages((prev) => [...prev, { role: 'user', content: chatInput }]);
+  setChatInput('');
+  setIsTyping(true);
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: chatInput })
+    });
+
+    const data = await res.json();
+
+    setAiMessages((prev) => [...prev, { role: 'assistant', content: data.reply }]);
+  } catch (err) {
+    setAiMessages((prev) => [...prev, { role: 'assistant', content: "⚠️ Failed to fetch reply." }]);
+  } finally {
+    setIsTyping(false);
+  }
+};
 
   // Load products
   useEffect(() => {
@@ -702,6 +732,106 @@ const handleCategoryClick = (category) => {
           </div>
         </div>
       </div>
+      {/* Floating Chat Button */}
+{!isChatOpen && (
+  <button
+    onClick={() => setIsChatOpen(true)}
+    style={{
+      position: 'fixed',
+      bottom: '100px',
+      left: '20px',
+      backgroundColor: '#2563EB',
+      color: 'white',
+      border: 'none',
+      borderRadius: '50%',
+      width: '60px',
+      height: '60px',
+      fontSize: '24px',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+      zIndex: 999
+    }}
+  >
+    💬
+  </button>
+)}
+
+{/* Floating Chat Panel */}
+{isChatOpen && (
+  <div
+    style={{
+      position: 'fixed',
+      bottom: '170px',
+      left: '20px',
+      width: '320px',
+      maxHeight: '420px',
+      backgroundColor: '#fff',
+      borderRadius: '16px',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+      zIndex: 999
+    }}
+  >
+    <div style={{ background: '#2563EB', padding: '1rem', color: 'white', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between' }}>
+      <span>MiniMar AI</span>
+      <button onClick={() => setIsChatOpen(false)} style={{ color: 'white', background: 'transparent', border: 'none', fontSize: '16px' }}>✖</button>
+    </div>
+
+    <div className="chat-box" style={{ padding: '1rem', overflowY: 'auto', flex: 1 }}>
+      {aiMessages.map((msg, index) => (
+        <div
+          key={index}
+          style={{
+            background: msg.role === 'user' ? '#d1e7ff' : '#f1f1f1',
+            padding: '8px 12px',
+            borderRadius: '8px',
+            marginBottom: '8px',
+            textAlign: msg.role === 'user' ? 'right' : 'left',
+            fontSize: '14px'
+          }}
+        >
+          <strong>{msg.role === 'user' ? 'You' : 'MiniMar AI'}:</strong> {msg.content}
+        </div>
+      ))}
+      {isTyping && (
+        <div style={{ fontStyle: 'italic', fontSize: '13px', color: '#888' }}>MiniMar AI is typing...</div>
+      )}
+    </div>
+
+    <div style={{ display: 'flex', borderTop: '1px solid #eee', padding: '0.5rem' }}>
+      <input
+        value={chatInput}
+        onChange={(e) => setChatInput(e.target.value)}
+        onKeyDown={(e) => e.key === 'Enter' && sendAiMessage()}
+        placeholder="Type a message..."
+        style={{
+          flex: 1,
+          border: 'none',
+          outline: 'none',
+          padding: '0.5rem',
+          borderRadius: '6px',
+          fontSize: '14px'
+        }}
+      />
+      <button
+        onClick={sendAiMessage}
+        style={{
+          marginLeft: '8px',
+          background: '#2563EB',
+          color: 'white',
+          border: 'none',
+          padding: '0.5rem 1rem',
+          borderRadius: '6px',
+          fontWeight: 'bold'
+        }}
+      >
+        Send
+      </button>
+    </div>
+  </div>
+)}
+
     </>
   );
 }
