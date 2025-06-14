@@ -2,6 +2,7 @@
 import Head from 'next/head';
 import '../styles/globals.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Analytics } from '@vercel/analytics/react'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <Component {...pageProps} />
+      <Analytics />
     </>
   );
 }
