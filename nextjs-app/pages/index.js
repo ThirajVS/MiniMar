@@ -2,8 +2,19 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import CategoryFilter from '@/components/CategoryFilter';
+import { saveShoppingList, loadShoppingList, saveCart, loadCart } from '@/lib/firestoreUtils';
 
 export default function Home() {
+  const [userId, setUserId] = useState("");
+
+useEffect(() => {
+  let storedId = localStorage.getItem("minimarUserId");
+  if (!storedId) {
+    storedId = "guest-" + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem("minimarUserId", storedId);
+  }
+  setUserId(storedId);
+}, []);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filter, setFilter] = useState('all');
   const [products, setProducts] = useState([]);
@@ -195,6 +206,12 @@ export default function Home() {
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
+useEffect(() => {
+  if (cartItems.length >= 0) {
+    if (userId) saveCart(userId, cartItems);
+  }
+}, [cartItems]);
+
   // Search functionality
 const filteredProducts = products.filter((p) => {
   const matchesCategory = filter === 'all' || p.category === filter;
@@ -223,6 +240,24 @@ useEffect(() => {
   document.addEventListener('click', handleClickOutside);
   return () => document.removeEventListener('click', handleClickOutside);
 }, []);
+
+useEffect(() => {
+  async function fetchData() {
+    if (userId) {
+      const savedCart = await loadCart(userId);
+      const savedList = await loadShoppingList(userId);
+
+      if (savedCart) {
+        setCartItems(savedCart);
+      }
+
+      console.log("Loaded Shopping List:", savedList);
+    }
+  }
+
+  fetchData();
+}, [userId]);  // 👉 Trigger only after userId is set
+
 
 const handleCategoryClick = (category) => {
   setSearchQuery('');          // 💥 clear search text
@@ -729,9 +764,20 @@ const handleCategoryClick = (category) => {
             >
               Clear Cart
             </button>
+            <button
+  onClick={() => {
+    // For now, let’s treat cartItems as the shopping list (or you can create a separate list state)
+    saveShoppingList(userId, cartItems);
+    alert("Shopping list saved to Firebase!");
+  }}
+  className="btn btn-outline"
+>
+  Save Shopping List
+</button>
           </div>
         </div>
       </div>
+      
       {/* Floating Chat Button */}
 {!isChatOpen && (
   <button
